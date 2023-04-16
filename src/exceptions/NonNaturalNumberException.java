@@ -1,0 +1,7 @@
+package exceptions;
+
+public class NonNaturalNumberException extends Exception{
+    public NonNaturalNumberException(){
+        super("Negative numbers and decimals are not valid.");
+    }
+}
