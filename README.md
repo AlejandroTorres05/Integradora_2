@@ -40,4 +40,6 @@ ___
 ___
 ## Notas importantes
 
--Para este proyecto, por cada commit que sea tenido en cuenta para las iteraciones de los indicadores de calidad, deberá haber un commit previo con todas las pruebas y sus respectivos escenarios. 
+<br>-Para este proyecto, por cada commit que sea tenido en cuenta para las iteraciones de los indicadores de calidad, deberá haber un commit previo con todas las pruebas y sus respectivos escenarios. 
+
+___
