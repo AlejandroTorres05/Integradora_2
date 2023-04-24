@@ -14,7 +14,7 @@ public class InventoryTest {
      * inventory object
      * */
     public void setupStage1 (){
-        inventory = new Inventory;
+        inventory = new Inventory();
     }
 
     /**
@@ -22,8 +22,8 @@ public class InventoryTest {
      * contains a Product object. The product object
      * is a Harry Potter book and its amount is ten
      * */
-    public void setupStage2 (){
-        inventory = new Inventory;
+    public void setupStage2 () throws NonNaturalNumberException{
+        inventory = new Inventory();
         inventory.saveProduct(
                 new Product("Harry Potter 1", "The first installment of the saga", 10, 10, 0)
         );
@@ -38,7 +38,7 @@ public class InventoryTest {
      * element
      * */
     @Test
-    public void saveProductMethodCanConstructsAndSavesANewElementCorrectlyTest(){
+    public void saveProductMethodCanConstructsAndSavesANewElementCorrectlyTest() throws NonNaturalNumberException{
 
         setupStage1();
         Product book = new Product("Harry Potter 1", "The first installment of the saga", 10, 0, 0);
@@ -46,7 +46,7 @@ public class InventoryTest {
         inventory.saveProduct(book);
 
         assertFalse(inventory.isEmpty());
-        assertTrue(inventory.contains(book.getName()));
+        assertTrue(inventory.contains(book));
     }
 
     /**
@@ -59,8 +59,10 @@ public class InventoryTest {
 
         setupStage1();
 
-        assertThrows((NonNaturalNumberException.class)->{
-            inventory.saveProduct();
+        assertThrows(NonNaturalNumberException.class, ()->{
+            inventory.saveProduct(
+                    new Product("", "", 0, 0, 0)
+            );
         });
     }
 
@@ -68,33 +70,26 @@ public class InventoryTest {
      * This test validates if the saveProduct method,
      * from inventory class, can throw NonNaturalNumberException exception
      * when a user type an incorrect value for the price. For
-     * that is necessary to use two try catch because the exception
+     * that is necessary to use two assertsThrows because the exception
      * can be thrown with the price zero or with a negative price
      * */
     @Test
     public void saveProductMethodThrowsNonNaturalNumberExceptionExceptionToThePriceTest (){
 
         setupStage1();
-        boolean result = false;
 
-        try {
+        assertThrows(NonNaturalNumberException.class, ()->{
             inventory.saveProduct(
                     new Product("", "", 0, 0, 0)
             );
-        } catch (NonNaturalNumberException ex){
-            result = true;
-        }
+        });
 
-        assertTrue(result);
-
-        try {
+        assertThrows(NonNaturalNumberException.class, ()->{
             inventory.saveProduct(
                     new Product("", "", -1, 0, 0)
             );
-        } catch (NonNaturalNumberException ex){
-            result = false;
-        }
-        assertFalse(result);
+        });
+
     }
 
     /**
@@ -106,15 +101,12 @@ public class InventoryTest {
     @Test
     public void saveProductMethodThrowsNonNaturalNumberExceptionExceptionToANegativeAmountTest (){
         setupStage1();
-        boolean result = false;
-        try {
+
+        assertThrows(NonNaturalNumberException.class, ()->{
             inventory.saveProduct(
                     new Product("", "", 1, -1, 0)
             );
-        } catch (NonNaturalNumberException ex){
-            result = true;
-        }
-        assertTrue(result);
+        });
     }
 
     /**
@@ -124,13 +116,14 @@ public class InventoryTest {
      * the actual saved product
      * */
     @Test
-    public void addToInventoryMethodCanAddMoreUnitsToASavedProductTest (){
+    public void addToInventoryMethodCanAddMoreUnitsToASavedProductTest ()
+            throws NonNaturalNumberException{
 
         setupStage2();
 
-        inventory.addToInventory("Harry Potter 1", 10);
+        inventory.addToInventory("Harry Potter 1", 10, 0);
 
-        assertEquals(20, inventory.unitsOf("Harry Potter 1"));
+        assertEquals(20, inventory.unitsOf("Harry Potter 1", 0));
     }
 
     /**
@@ -140,11 +133,12 @@ public class InventoryTest {
      * saved product
      * */
     @Test
-    public void addToInventoryMethodCanThrowNonNaturalNumberExceptionExceptionTest (){
+    public void addToInventoryMethodCanThrowNonNaturalNumberExceptionExceptionTest ()
+            throws NonNaturalNumberException{
 
         setupStage1();
-        assertThrows(NonNaturalNumberException.class ->{
-           inventory.addToInventory();
+        assertThrows(NonNaturalNumberException.class, ()->{
+           inventory.addToInventory("Harry Potter 1", -10, 0);
         });
     }
 }
