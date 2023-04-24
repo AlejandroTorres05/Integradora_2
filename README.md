@@ -16,11 +16,20 @@ ___
 
 ### Iteración 1 
 <br> Para esta iteración se tendrá en cuenta el commit:
+
 **Densidad de errores-fallos** = 0
 
 **Confiabilidad** = 0
 
 **Completitud** = 3.01
+
+### Iteración 2
+
+<br> Para esta iteración se tendrá en cuenta el commit: **15cb3779d6e38f4d89032ae39dad39ac9ee06bd8**
+<br> **Densidad de errores-fallos** = 0
+<br> **Confiabilidad** = 1
+<br> **Completitud** = 0.1
+<br> Para este momento del desarrollo, a partir de las pruebas diseñadas, podemos establecer una densidad de errores de cero y una confiabilidad de 1. Pero, el indicador de completitud solo avanzará lo que el porcentaje que esta parte del desarrollo represente. 
 
 ### Iteración n
 **Densidad de errores-fallos** = n
@@ -28,6 +37,7 @@ ___
 **Confiabilidad** = n
 
 **Completitud** = n
-
 ___
 ## Notas importantes
+
+-Para este proyecto, por cada commit que sea tenido en cuenta para las iteraciones de los indicadores de calidad, deberá haber un commit previo con todas las pruebas y sus respectivos escenarios. 
