@@ -10,11 +10,12 @@ public class Product {
 
     private Category category;
 
-    public Product(String name, String description, double price, int amount) {
+    public Product(String name, String description, double price, int amount, int category) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.amount = amount;
+        this.category = Category.values()[category];
         purchases_count = 0;
     }
 
