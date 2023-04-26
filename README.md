@@ -16,7 +16,6 @@ ___
 
 ### Iteración 1 
 <br> Para esta iteración se tendrá en cuenta el commit:
-
 **Densidad de errores-fallos** = 0
 
 **Confiabilidad** = 0
@@ -29,14 +28,21 @@ ___
 <br> **Densidad de errores-fallos** = 0
 <br> **Confiabilidad** = 1
 <br> **Completitud** = 0.1
-<br> Para este momento del desarrollo, a partir de las pruebas diseñadas, podemos establecer una densidad de errores de cero y una confiabilidad de 1. Pero, el indicador de completitud solo avanzará lo que el porcentaje que esta parte del desarrollo represente. 
+<br> **Descripción**: Para este momento del desarrollo, a partir de las pruebas diseñadas, podemos establecer una densidad de errores de cero y una confiabilidad de 1. Pero, el indicador de completitud solo avanzará lo que el porcentaje que esta parte del desarrollo represente. 
 
-### Iteración n
-**Densidad de errores-fallos** = n
+### Iteración 3
+<br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
+<br> **Densidad de errores-fallos** = 0
+<br> **Confiabilidad** = 5
+<br> **Completitud** = 2
+<br> **Descripción**: Para este momento del desarrollo, podemos establecer una densidad de errores de cero y una confiabilidad de 5, El indicador de completitud solo avanzo un poco ya que hasta la fecha de este commit lo que se tiene son las clases bases para la implementación de los requerimientos. 
 
-**Confiabilidad** = n
-
-**Completitud** = n
+### Iteración N
+<br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
+<br> **Densidad de errores-fallos** = N
+<br> **Confiabilidad** = N
+<br> **Completitud** = N
+<br> **Descripción**: N
 ___
 ## Notas importantes
 
