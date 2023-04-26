@@ -49,6 +49,9 @@ public class Product {
     public int getAmount() {
         return amount;
     }
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
     public void editAmount (int amount) {
         this.amount += amount;
     }
@@ -60,6 +63,7 @@ public class Product {
         this.purchases_count = purchases_count;
     }
     public int getCategory (){
+
         if (this.category == Category.BOOKS){
             return 0;
         }else if (this.category == Category.ELECTRONICS){
