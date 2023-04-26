@@ -31,7 +31,7 @@ ___
 <br> **Descripción**: Para este momento del desarrollo, a partir de las pruebas diseñadas, podemos establecer una densidad de errores de cero y una confiabilidad de 1. Pero, el indicador de completitud solo avanzará lo que el porcentaje que esta parte del desarrollo represente. 
 
 ### Iteración 3
-<br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
+<br> Para esta iteración se tendrá en cuenta el commit: **afe6044fcce08df4e6e53f45d61a6f2c39da1bb2**
 <br> **Densidad de errores-fallos** = 0
 <br> **Confiabilidad** = 5
 <br> **Completitud** = 2
