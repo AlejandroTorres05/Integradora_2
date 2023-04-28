@@ -10,6 +10,7 @@ import java.util.ArrayList;
   * */
 public class Inventory {
 
+
     private ArrayList<Product> books;
     private ArrayList<Product> electronics;
     private ArrayList<Product> clothing;
@@ -45,27 +46,19 @@ public class Inventory {
      *                 the system will save the new product in
      *                 the system
      * */
-    public void saveProduct( Product product){
+    public void saveProduct(Product product){
         int cat = product.getCategory();
-        if (contains(product)){
 
-        } else {
-            if (cat == 0){
-                books.add(product);
-            }else if (cat == 1){
-                electronics.add(product);
-            }else if (cat == 2){
-                clothing.add(product);
-            }else if (cat == 3){
-                food.add(product);
-            }else if (cat == 4){
-                stationery.add(product);
-            }else if (cat == 5){
-                sports.add(product);
-            }else if (cat == 6){
-                personalCare.add(product);
-            }else{
-                games.add(product);
+        if (!contains(product)){
+            switch (cat) {
+                case 0 -> books.add(product);
+                case 1 -> electronics.add(product);
+                case 2 -> clothing.add(product);
+                case 3 -> food.add(product);
+                case 4 -> stationery.add(product);
+                case 5 -> sports.add(product);
+                case 6 -> personalCare.add(product);
+                case 7 -> games.add(product);
             }
         }
     }
@@ -91,32 +84,45 @@ public class Inventory {
      * */
     public void addToInventory (String name, int amount, int category)
             throws NonNaturalNumberException{
-        if (amount < 0) throw new NonNaturalNumberException("Cannot add negative stock");
-        int index = -1;
-        if (category == 0){
-            index = indexOf(this.books, name);
-            this.books.get(index).editAmount(amount);
-        }else if (category == 1){
-            index = indexOf(this.electronics, name);
-            this.electronics.get(index).editAmount(amount);
-        }else if (category == 2){
-            index = indexOf(this.clothing, name);
-            this.clothing.get(index).editAmount(amount);
-        }else if (category == 3){
-            index = indexOf(this.food, name);
-            this.food.get(index).editAmount(amount);
-        }else if (category == 4){
-            index = indexOf(this.stationery, name);
-            this.stationery.get(index).editAmount(amount);
-        }else if (category == 5){
-            index = indexOf(this.sports, name);
-            this.sports.get(index).editAmount(amount);
-        }else if (category == 6){
-            index = indexOf(this.personalCare, name);
-            this.personalCare.get(index).editAmount(amount);
-        }else {
-            index = indexOf(this.games, name);
-            this.games.get(index).editAmount(amount);
+
+        int index;
+
+        switch (category) {
+            case 0 -> {
+                index = indexOf(this.books, name);
+                this.books.get(index).editAmount(amount);
+            }
+            case 1 -> {
+                index = indexOf(this.electronics, name);
+                this.electronics.get(index).editAmount(amount);
+            }
+            case 2 -> {
+                index = indexOf(this.clothing, name);
+                this.clothing.get(index).editAmount(amount);
+            }
+            case 3 -> {
+                index = indexOf(this.food, name);
+                this.food.get(index).editAmount(amount);
+            }
+            case 4 -> {
+                index = indexOf(this.stationery, name);
+                this.stationery.get(index).editAmount(amount);
+            }
+            case 5 -> {
+                index = indexOf(this.sports, name);
+                this.sports.get(index).editAmount(amount);
+            }
+            case 6 -> {
+                index = indexOf(this.personalCare, name);
+                this.personalCare.get(index).editAmount(amount);
+            }
+            case 7 -> {
+                index = indexOf(this.games, name);
+                this.games.get(index).editAmount(amount);
+            }
+            default -> {
+                throw new NonNaturalNumberException("Cannot add negative stock");
+            }
         }
     }
 
@@ -183,26 +189,17 @@ public class Inventory {
      * @Post This method will return a boolean
      * */
     public boolean contains (Product goal) throws InvalidCategoryException{
-        switch (goal.getCategory()){
-            case 0:
-                return this.books.contains(goal);
-            case 1:
-                return this.electronics.contains(goal);
-            case 2:
-                return this.clothing.contains(goal);
-            case 3:
-                return this.food.contains(goal);
-            case 4:
-                return this.stationery.contains(goal);
-            case 5:
-                return this.sports.contains(goal);
-            case 6:
-                return this.personalCare.contains(goal);
-            case 7:
-                return this.games.contains(goal);
-            default:
-                throw new InvalidCategoryException();
-      }
+        return switch (goal.getCategory()) {
+            case 0 -> this.books.contains(goal);
+            case 1 -> this.electronics.contains(goal);
+            case 2 -> this.clothing.contains(goal);
+            case 3 -> this.food.contains(goal);
+            case 4 -> this.stationery.contains(goal);
+            case 5 -> this.sports.contains(goal);
+            case 6 -> this.personalCare.contains(goal);
+            case 7 -> this.games.contains(goal);
+            default -> throw new InvalidCategoryException();
+        };
     }
 
     /**

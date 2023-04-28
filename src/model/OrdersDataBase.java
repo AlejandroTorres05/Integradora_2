@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-public class Orders {
+public class OrdersDataBase {
     ArrayList<Order> orders;
 
-    public Orders(){
+    public OrdersDataBase(){
         orders = new ArrayList<>();
     }
 
