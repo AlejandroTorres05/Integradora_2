@@ -5,6 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class just validates the basic
+ * behavior of an inventory. To see the
+ * tests of the product search engine,
+ * go to ProductSearchEngineTest class
+ * @see ProductSearchEngineTest
+ * */
 public class InventoryTest {
 
     public static Inventory inventory;
@@ -120,10 +127,11 @@ public class InventoryTest {
             throws NonNaturalNumberException{
 
         setupStage2();
+        Product product = new Product("Harry Potter 1","", 10, 0, 0);;
 
-        inventory.addToInventory("Harry Potter 1", 10, 0);
+        inventory.addToInventory(product, 10);
 
-        assertEquals(20, inventory.unitsOf("Harry Potter 1", 0));
+        assertEquals(20, inventory.unitsOf("Harry Potter 1"));
     }
 
     /**
@@ -135,10 +143,11 @@ public class InventoryTest {
     @Test
     public void addToInventoryMethodCanThrowNonNaturalNumberExceptionExceptionTest ()
             throws NonNaturalNumberException{
-
         setupStage1();
+        Product book = new Product("Harry Potter 1", "The first installment of the saga", 10, 0, 0);
+
         assertThrows(NonNaturalNumberException.class, ()->{
-           inventory.addToInventory("Harry Potter 1", -10, 0);
+           inventory.addToInventory(book, -10);
         });
     }
 }

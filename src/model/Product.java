@@ -2,7 +2,7 @@ package model;
 
 import exceptions.NonNaturalNumberException;
 
-public class Product {
+public class Product implements Comparable<Product>{
 
     private String name;
     private String description;
@@ -81,5 +81,25 @@ public class Product {
         }else {
             return 8;
         }
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return this.getName().compareTo(o.getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Product product = (Product) obj;
+        Double localPrice = (Double) this.getPrice();
+        Double actPrice = (Double) product.getPrice();
+        if(this.getName().equals((product.getName()))){
+            if (localPrice.equals(actPrice)){
+                if (this.category == product.category){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
