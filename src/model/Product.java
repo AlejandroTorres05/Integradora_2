@@ -1,7 +1,10 @@
 package model;
 
 import exceptions.NonNaturalNumberException;
-
+/**
+ * @author Silem Nabib Villa Contreras
+ * @author Alejandro Torres Soto
+ * */
 public class Product implements Comparable<Product>{
 
     private String name;
