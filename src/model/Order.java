@@ -2,14 +2,22 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+/**
+ * @author Silem Nabib Villa Contreras
+ * @author Alejandro Torres Soto
+ * */
 public class Order {
+
     private String purchaserName;
     private double totalPrice;
     private LocalDate purchaseDate;
 
     private ArrayList<Product> order;
 
+    /**
+     Creates an order with the specified purchaser name and current date.
+     @param purchaserName the name of the purchaser
+     */
     public Order(String purchaserName){
         this(purchaserName, LocalDate.now());
     }
@@ -49,7 +57,7 @@ public class Order {
         if (index != -1){
             order.get(index).editAmount(amount);
         } else{
-            product.setPurchases_count(0);
+            product.setSales(0);
             product.setAmount(amount);
             order.add(product);
         }

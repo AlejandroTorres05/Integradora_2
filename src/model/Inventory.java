@@ -4,7 +4,7 @@ import exceptions.NonNaturalNumberException;
 
 import java.util.ArrayList;
  /**
-  * @author Silem Nabid Villa Contreras
+  * @author Silem Nabib Villa Contreras
   * @author Alejandro Torres Soto
   * */
 public class Inventory implements SearchEngineInterface<Product>{

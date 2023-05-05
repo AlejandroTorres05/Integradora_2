@@ -8,9 +8,18 @@ public class Product implements Comparable<Product>{
     private String description;
     private double price;
     private int amount;
-    private int purchases_count;
+    private int sales;
     private Category category;
 
+    /**
+     *
+     * @param name the name of the product
+     * @param description the description of the product
+     * @param price the price of the product
+     * @param amount the amount of the product
+     * @param category the index Category of the product
+     * @throws NonNaturalNumberException if the amount or price is negative or if the category is out of range
+     */
     public Product(String name, String description, double price, int amount, int category)
             throws NonNaturalNumberException{
         if (amount < 0) throw new NonNaturalNumberException("Cannot add negative stock");
@@ -22,65 +31,97 @@ public class Product implements Comparable<Product>{
         this.price = price;
         this.amount = amount;
         this.category = Category.values()[category];
-        purchases_count = 0;
+        sales = 0;
     }
 
+    /**
+     * Returns the name of the product.
+     * @return The name of the product.
+     */
     public String getName() {
         return name;
     }
+    /**
+     * Sets the name of the product.
+     * @param name The new name of the product.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Returns the description of the product.
+     * @return The description of the product.
+     */
     public String getDescription() {
         return description;
     }
+    /**
+     * Sets the description of the product.
+     * @param description The new description of the product.
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Returns the price of the product.
+     * @return The price of the product.
+     */
     public double getPrice() {
         return price;
     }
+    /**
+     * Sets the price of the product.
+     * @param price The new price of the product.
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Returns the description of the product.
+     * @return The description of the product.
+     */
     public int getAmount() {
         return amount;
     }
+    /**
+     * Sets the amount of the product.
+     * @param amount The new amount of the product.
+     */
     public void setAmount(int amount) {
         this.amount = amount;
     }
+    /**
+     * Adds to the product the specified amount to the current amount.
+     * @param amount the amount to add to the current amount of the product.
+     */
     public void editAmount (int amount) {
         this.amount += amount;
     }
 
-    public int getPurchases_count() {
-        return purchases_count;
+    /**
+     * Returns the sales of the product.
+     * @return The sales of the product.
+     */
+    public int getSales() {
+        return sales;
     }
-    public void setPurchases_count(int purchases_count) {
-        this.purchases_count = purchases_count;
+    /**
+     * Sets the sales of the product.
+     * @param sales The new sales of the product.
+     */
+    public void setSales(int sales) {
+        this.sales = sales;
     }
-    public int getCategory (){
 
-        if (this.category == Category.BOOKS){
-            return 0;
-        }else if (this.category == Category.ELECTRONICS){
-            return 1;
-        }else if (this.category == Category.CLOTHING_AND_ACCESSORIES){
-            return 2;
-        }else if (this.category == Category.FOOD_AND_DRINKS){
-            return 3;
-        }else if (this.category == Category.STATIONERY){
-            return 4;
-        }else if (this.category == Category.SPORTS){
-            return 5;
-        }else if (this.category == Category.BEAUTY_AND_PERSONAL_CARE){
-            return 7;
-        }else {
-            return 8;
-        }
+    /**
+     Returns the index of the Category enum based on the category of the product.
+     @return the index of the Category.
+     */
+    public int getCategory (){
+        return category.ordinal();
     }
 
     @Override
