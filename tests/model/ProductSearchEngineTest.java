@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.NonNaturalNumberException;
+import exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class ProductSearchEngineTest {
             throws NonNaturalNumberException {
         setupStage1();
         int amount1 = inventory.searchAnElement("Beer barrel", 100, 3, 0);
-        int amount2 = inventory.searchElement("Play Station 5", 500, 7, 0);
+        int amount2 = inventory.searchAnElement("Play Station 5", 500, 7, 0);
         assertEquals(15, amount1);
         assertEquals(100, amount2);
     }
@@ -81,8 +82,8 @@ public class ProductSearchEngineTest {
     public void searchAnElementCanThrowProductIsNotRegisteredExceptionExceptionTest ()
             throws NonNaturalNumberException{
         setupStage1();
-        assertThrows(ProductIsNotRegisteredException.class, ->{
-            searchAnElement("Non-existent", 0, 3, 7);
+        assertThrows(ProductIsNotRegisteredException.class, ()->{
+            inventory.searchAnElement("Non-existent", 2, 3, 7);
         });
     }
 
@@ -97,7 +98,7 @@ public class ProductSearchEngineTest {
             throws NonNaturalNumberException{
         setupStage1();
 
-        ArrayList<Product> filtered = filterByRange(1,5,15);
+        ArrayList<Product> filtered = inventory.filterByRange(1,5,15);
         ArrayList<Product> expectedProducts = new ArrayList<>();
 
         expectedProducts.add(new Product("Red T-shirt", "Red T-shirt", 15, 100, 2));
@@ -120,7 +121,7 @@ public class ProductSearchEngineTest {
             throws NonNaturalNumberException{
         setupStage1();
 
-        ArrayList<Product> filtered = filterByRange(2,0,2);
+        ArrayList<Product> filtered = inventory.filterByRange(2,0,2);
         ArrayList<Product> expectedProducts = new ArrayList<>();
 
         expectedProducts.add(new Product("Fridge", "Fridge", 500, 20, 1));
@@ -148,7 +149,7 @@ public class ProductSearchEngineTest {
             throws NonNaturalNumberException{
         setupStage1();
 
-        ArrayList<Product> filtered = filterByRange(3,10,60);
+        ArrayList<Product> filtered = inventory.filterByRange(3,10,60);
         ArrayList<Product> expectedProducts = new ArrayList<>();
 
         expectedProducts.add(new Product("Fridge", "Fridge", 500, 20, 1));
@@ -169,8 +170,8 @@ public class ProductSearchEngineTest {
      * */
     @Test
     public void filterByRangeMethodCanThrowThereIsNotProductsByTheFilterExceptionExceptionTest(){
-        assertThrows(ThereIsNotProductByTheFilterException.class, ->{
-            filterByRange(2,10,100);
+        assertThrows(ThereIsNotProductsByTheFilterException.class, ()->{
+            inventory.filterByRange(2,10,100);
         });
     }
 
@@ -183,7 +184,7 @@ public class ProductSearchEngineTest {
             throws NonNaturalNumberException{
         setupStage1();
 
-        ArrayList<Product> filtered = filterByInterval("F","e");
+        ArrayList<Product> filtered = inventory.filterByInterval("F","e");
         Product expected = new Product("Fridge", "Fridge", 500, 20, 1);
 
         assertEquals(filtered.get(0), expected);
@@ -198,7 +199,7 @@ public class ProductSearchEngineTest {
             throws NonNaturalNumberException{
         setupStage1();
 
-        ArrayList<Product> filtered = filterByInterval("Har","ion");
+        ArrayList<Product> filtered = inventory.filterByInterval("Har","ion");
         Product expected = new Product("Harry Potter Collection", "A book", 10, 10, 0);
 
         assertEquals(filtered.get(0), expected);
@@ -212,8 +213,8 @@ public class ProductSearchEngineTest {
      * */
     @Test
     public void filterByIntervalMethodCanThrowThereIsNotProductsByTheFilterExceptionExceptionTest(){
-        assertThrows(ThereIsNotProductByTheFilterException.class, ->{
-            filterByInterval("NON", "NON");
+        assertThrows(ThereIsNotProductsByTheFilterException.class, ()->{
+            inventory.filterByInterval("NON", "NON");
         });
     }
 }

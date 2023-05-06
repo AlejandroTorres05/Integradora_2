@@ -1,13 +1,15 @@
 package model;
 
 import exceptions.NonNaturalNumberException;
+import exceptions.ProductIsNotRegisteredException;
+import exceptions.ThereIsNotProductsByTheFilterException;
 
 import java.util.ArrayList;
  /**
   * @author Silem Nabib Villa Contreras
   * @author Alejandro Torres Soto
   * */
-public class Inventory implements SearchEngineInterface<Product>{
+public class Inventory{
 
 
     private static ArrayList<Product> lastSearch = new ArrayList<>();
@@ -221,8 +223,96 @@ public class Inventory implements SearchEngineInterface<Product>{
         return -1;
     }
 
-     @Override
-     public String searchEngine(ArrayList<Product> array, int filter) {
-         return null;
+    public int searchAnElement (String name, double price, int category, int sales)
+            throws ProductIsNotRegisteredException, NonNaturalNumberException {
+
+        Product temporal = new Product(name, "", price, 0, category);
+        int index = indexOf(temporal);
+
+        if(index == -1)
+            throw new ProductIsNotRegisteredException();
+
+        return this.products.get(index).getAmount();
+    }
+
+    public ArrayList<Product> filterByRange (int option, double beginning, double end)
+            throws ThereIsNotProductsByTheFilterException {
+
+        ArrayList<Product> filtered = new ArrayList<>();
+
+        switch (option){
+            case 1:
+                filtered = filterByPrice(beginning, end);
+                break;
+            case 2:
+                filtered = filterBySales((int) beginning, (int) end);
+                break;
+            case 3:
+                filtered = filterByAmount((int) beginning, (int) end);
+                break;
+        }
+        lastSearch = filtered;
+
+        if (filtered.isEmpty())
+            throw new ThereIsNotProductsByTheFilterException();
+        return filtered;
+    }
+
+    private ArrayList<Product> filterByPrice (double beginning, double end){
+
+        ArrayList<Product> filtered = new ArrayList<>();
+
+        for (int i = 0; i<this.products.size(); i++){
+            if (this.products.get(i).getPrice() >= beginning
+                    && this.products.get(i).getPrice() <= end){
+                filtered.add(this.products.get(i));
+            }
+        }
+
+        return filtered;
+    }
+
+    private ArrayList<Product> filterBySales (int beginning, int end){
+
+        ArrayList<Product> filtered = new ArrayList<>();
+
+        for (int i = 0; i<this.products.size(); i++){
+            if(this.products.get(i).getSales() >= beginning
+                    && this.products.get(i).getSales() <= end){
+                filtered.add(this.products.get(i));
+            }
+        }
+
+        return filtered;
+    }
+
+     private ArrayList<Product> filterByAmount (int beginning, int end){
+
+         ArrayList<Product> filtered = new ArrayList<>();
+
+         for (int i = 0; i<this.products.size(); i++){
+             if(this.products.get(i).getAmount() >= beginning
+                     && this.products.get(i).getAmount() <= end){
+                 filtered.add(this.products.get(i));
+             }
+         }
+
+         return filtered;
+     }
+
+     public ArrayList<Product> filterByInterval (String beginning, String end)
+             throws ThereIsNotProductsByTheFilterException{
+
+        ArrayList<Product> filtered = new ArrayList<>();
+
+        for (int i = 0; i<this.products.size(); i++){
+            if ( this.products.get(i).getName().startsWith(beginning) && this.products.get(i).getName().endsWith(end)){
+                filtered.add(this.products.get(i));
+            }
+        }
+
+         if (filtered.isEmpty())
+             throw new ThereIsNotProductsByTheFilterException();
+         return filtered;
      }
  }
