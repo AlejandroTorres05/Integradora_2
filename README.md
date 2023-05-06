@@ -3,7 +3,7 @@
 ___
 ### Previo a los indicadores
 <br> Dado que, para este desarrollo las pruebas se irán diseñando justo antes de implementar las funcionalidades, hemos decidido dividir la totalidad del proyecto en cinco bloques, cada bloque tendrá un respectivo porcentaje. Los porcentajes, son los siguientes: 
-<br> 1.	 Guardar un nuevo producto a aumentar su cantidad. 10%
+<br> 1.	 Guardar un nuevo producto o aumentar su cantidad. 10%
 <br> 2.	Guardar un nuevo pedido. 10%
 <br> 3.	Persistencia. 10%
 <br> 4.	Buscador de productos en su totalidad. 35%
@@ -36,6 +36,13 @@ ___
 <br> **Confiabilidad** = 5
 <br> **Completitud** = 2
 <br> **Descripción**: Para este momento del desarrollo, podemos establecer una densidad de errores de cero y una confiabilidad de 5, El indicador de completitud solo avanzo un poco ya que hasta la fecha de este commit lo que se tiene son las clases bases para la implementación de los requerimientos. 
+
+### Iteración 4
+<br> Para esta iteración se tendrá en cuenta el commit: **2c7dcec4038fd429b508ce553ce7a1dfd45bea75**
+<br> **Densidad de errores-fallos** = 2
+<br> **Confiabilidad** = 15
+<br> **Completitud** = 10
+<br> **Descripción**: Para este momento del desarrollo, podeos establecer una densidad de errores de 2 uy una confiabilidad de 15, El indicador de completitud avanza a 10 ya que se permite guardar un nuevo producto o aumentar su cantidad en caso de que ya exista.
 
 ### Iteración N
 <br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
