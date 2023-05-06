@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Inventory implements SearchEngineInterface<Product>{
 
 
+    private static ArrayList<Product> lastSearch = new ArrayList<>();
     private ArrayList<Product> products;
 
     public Inventory (){
@@ -55,7 +56,8 @@ public class Inventory implements SearchEngineInterface<Product>{
      * @Post the new product will be saved
      * */
     private void saveNewProduct(Product pivot){
-        if (this.products.isEmpty()){
+        if (this.products.isEmpty() ||
+                pivot.compareTo(this.products.get(this.products.size()-1)) > 0){
             this.products.add(pivot);
             return;
         }
