@@ -53,14 +53,14 @@ public class Inventory{
      * use a binary search algorithm tho find the
      * right position to save the new element, following
      * the ascending order by the name.
-     * @param pivot a Product, is the new product to
+     * @param newProduct a Product, is the new product to
      *              be saved at the inventory
      * @Pre there must be an Inventory object instanced
      *              at the system
      * @Post the new product will be saved
      * */
-    private void saveNewProduct(Product pivot){
-        this.products.add(pivot);
+    private void saveNewProduct(Product newProduct){
+        this.products.add(newProduct);
         Collections.sort(this.products);
     }
 

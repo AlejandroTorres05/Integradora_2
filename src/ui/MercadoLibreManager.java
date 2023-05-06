@@ -16,8 +16,7 @@ public class MercadoLibreManager {
 
     public static void main(String[] args)  {
         MercadoLibreManager manager = new MercadoLibreManager();
-
-        manager.registerProduct();
+        manager.menu();
     }
 
     public void menu(){
@@ -47,19 +46,14 @@ public class MercadoLibreManager {
                 break;
 
             case 1:
-
-
-
+                System.out.println("¬ | Registering New Product");
+                registerProduct();
                 break;
 
             default:
                 System.out.println("Error, Option out of range.");
                 break;
         }
-    }
-
-    public void registerOrder(){
-
     }
 
     public void registerProduct(){
@@ -96,6 +90,10 @@ public class MercadoLibreManager {
         } catch (NonNaturalNumberException exception) {
             System.out.println("\nProduct registration failed, " + exception.getMessage());
         }
+
+    }
+
+    public void registerOrder(){
 
     }
 }
