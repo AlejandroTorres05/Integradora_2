@@ -135,15 +135,11 @@ public class Product implements Comparable<Product>{
     @Override
     public boolean equals(Object obj) {
         Product product = (Product) obj;
-        Double localPrice = (Double) this.getPrice();
-        Double actPrice = (Double) product.getPrice();
-        if(this.getName().equals((product.getName()))){
-            if (localPrice.equals(actPrice)){
-                if (this.category == product.category){
-                    return true;
-                }
-            }
+        if(this.getName().equals((product.getName()))
+                && this.price == product.price && this.category == product.category){
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }
