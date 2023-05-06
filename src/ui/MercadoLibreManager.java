@@ -1,8 +1,8 @@
 package ui;
 
+import exceptions.NonNaturalNumberException;
 import model.MercadoLibreController;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class MercadoLibreManager {
@@ -17,6 +17,7 @@ public class MercadoLibreManager {
     public static void main(String[] args)  {
         MercadoLibreManager manager = new MercadoLibreManager();
 
+        manager.registerProduct();
     }
 
     public void menu(){
@@ -24,12 +25,18 @@ public class MercadoLibreManager {
         do{
             System.out.println("""
                     ¬ | Menu
-                     1. Option
+                     1. Register New Product
                      2. Option
                      3. Option
                      4. Option
                      5. Option
                     """);
+
+            option = sc.nextInt();
+            sc.nextLine();
+
+            executeMenu(option);
+
         } while (option != 0);
     }
 
@@ -40,6 +47,9 @@ public class MercadoLibreManager {
                 break;
 
             case 1:
+
+
+
                 break;
 
             default:
@@ -49,6 +59,43 @@ public class MercadoLibreManager {
     }
 
     public void registerOrder(){
+
+    }
+
+    public void registerProduct(){
+
+        System.out.print("Register Product name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Register Product description: ");
+        String description = sc.nextLine();
+
+        System.out.print("Register Product price: ");
+        double price = sc.nextDouble();
+        sc.nextLine();
+
+        System.out.print("Register Product amount: ");
+        int amount = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println(controller.showCategories());
+        System.out.print("Choice a category: ");
+        int category = sc.nextInt();
+        sc.nextLine();
+
+        try {
+            controller.addProduct(
+                    controller.createProduct(
+                            name,
+                            description,
+                            price,
+                            amount,
+                            category
+                    )
+            );
+        } catch (NonNaturalNumberException exception) {
+            System.out.println("\nProduct registration failed, " + exception.getMessage());
+        }
 
     }
 }

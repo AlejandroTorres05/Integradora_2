@@ -5,13 +5,13 @@ import java.util.ArrayList;
  * @author Silem Nabib Villa Contreras
  * @author Alejandro Torres Soto
  * */
-public class OrdersDataBase {
+public class OrderStorage {
     ArrayList<Order> orders;
 
     /**
      * Creates a ordersDataBase.
      */
-    public OrdersDataBase(){
+    public OrderStorage(){
         orders = new ArrayList<>();
     }
 
