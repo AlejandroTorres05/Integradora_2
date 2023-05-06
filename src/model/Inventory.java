@@ -5,7 +5,9 @@ import exceptions.ProductIsNotRegisteredException;
 import exceptions.ThereIsNotProductsByTheFilterException;
 
 import java.util.ArrayList;
- /**
+import java.util.Collections;
+
+/**
   * @author Silem Nabib Villa Contreras
   * @author Alejandro Torres Soto
   * */
@@ -58,45 +60,8 @@ public class Inventory{
      * @Post the new product will be saved
      * */
     private void saveNewProduct(Product pivot){
-        if (this.products.isEmpty() ||
-                pivot.compareTo(this.products.get(this.products.size()-1)) > 0){
-            this.products.add(pivot);
-            return;
-        }
-        if (this.products.size() == 1){
-            if (pivot.compareTo(this.products.get(0)) > 0){
-                this.products.add(pivot);
-            }else {
-                this.products.add(0, pivot);
-            }
-        }
-        int i = 0;
-        int j = this.products.size() - 1;
-
-        while (i <= j){
-            int mid = (i+j)/2;
-            Product midVal = this.products.get(mid);
-
-            if (i>j){
-                if (j<0){
-                    for(int k = 0; k<i; k++){
-                        if(this.products.get(k).compareTo(pivot) > 0){
-                            this.products.add((k-1), pivot);
-                        }
-                    }
-                } else {
-                    for(int k = j; k<i; k++){
-                        if(this.products.get(k).compareTo(pivot) > 0){
-                            this.products.add((k-1), pivot);
-                        }
-                    }
-                }
-            }else if (pivot.compareTo(midVal) > 0){
-                i = mid+1;
-            }else {
-                j = mid-1;
-            }
-        }
+        this.products.add(pivot);
+        Collections.sort(this.products);
     }
 
     /**

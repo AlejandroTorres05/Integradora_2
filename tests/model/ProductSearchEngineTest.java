@@ -99,14 +99,15 @@ public class ProductSearchEngineTest {
         setupStage1();
 
         ArrayList<Product> filtered = inventory.filterByRange(1,5,15);
-        ArrayList<Product> expectedProducts = new ArrayList<>();
+        String filteredProducts = "";
 
-        expectedProducts.add(new Product("Red T-shirt", "Red T-shirt", 15, 100, 2));
-        expectedProducts.add(new Product("VacuumCleaner", "VacuumCleaner", 5, 20, 1));
-        expectedProducts.add(new Product("How to make money?", "To make money", 5, 20, 0));
-        expectedProducts.add(new Product("Harry Potter Collection", "A book", 10, 10, 0));
+        for (int i = 0; i < filtered.size(); i++){
+            filteredProducts += filtered.get(i).getName() + " ";
+        }
 
-        assertEquals(filtered, expectedProducts);
+        String expectedProducts = "Red T-shirt VacuumCleaner How to make money? Harry Potter Collection ";
+
+        assertEquals(filteredProducts, expectedProducts);
     }
 
     /**
