@@ -2,9 +2,13 @@ package model;
 
 import exceptions.NonNaturalNumberException;
 import exceptions.OutOfStockException;
+import exceptions.ProductIsNotRegisteredException;
+import exceptions.ThereIsNotProductsByTheFilterException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MercadoLibreController {
     private Inventory inventory;
@@ -89,5 +93,106 @@ public class MercadoLibreController {
         productsAmount = new ArrayList<>();
     }
 
+    /**
+     *
+     * */
+    public int searchAProduct(String name, double price, int category, int sales)
+            throws NonNaturalNumberException, ProductIsNotRegisteredException {
+        return inventory.searchAnElement(name, price, category, sales);
+    }
+
+    /**
+     *
+     * */
+    public void filterByRange (int option, double beginning, double end)
+            throws ThereIsNotProductsByTheFilterException {
+        inventory.filterByRange(option, beginning, end);
+    }
+
+    public String showAByRangeSearch (int filter, int order){
+        ArrayList<Product> lasSearch = inventory.getLastSearch();
+        String message = "";
+        switch (order){
+            case 1:
+                switch (filter){
+                    case 1:
+                        Collections.sort(lasSearch);
+                        break;
+                    case 2:
+                        Collections.sort(lasSearch, (a,b)->{
+                            return (int)(a.getPrice() - b.getPrice());
+                        });
+                        break;
+                    case 3:
+                        Collections.sort(lasSearch, (a,b)->{
+                            return a.getCategory() - b.getCategory();
+                        });
+                        break;
+                    case 4:
+                        Collections.sort(lasSearch, (a,b)->{
+                            return a.getSales() - b.getSales();
+                        });
+                        break;
+                }
+                break;
+            case 2:
+                switch (filter){
+                    case 1:
+                        Collections.sort(lasSearch, (a,b)->{
+                            return b.getName().compareTo(a.getName());
+                        });
+                        break;
+                    case 2:
+                        Collections.sort(lasSearch, (a,b)->{
+                            return (int)(b.getPrice() - a.getPrice());
+                        });
+                        break;
+                    case 3:
+                        Collections.sort(lasSearch, (a,b)->{
+                            return b.getCategory() - a.getCategory();
+                        });
+                        break;
+                    case 4:
+                        Collections.sort(lasSearch, (a,b)->{
+                            return b.getSales() - a.getSales();
+                        });
+                        break;
+                }
+                break;
+        }
+
+        for (int i = 0; i<lasSearch.size(); i++){
+            Product temporal = lasSearch.get(i);
+            message += (i+1) + ". " + temporal.getName() + " ,price " + temporal.getPrice() + " ,amount " + temporal.getAmount();
+        }
+
+        return message;
+    }
+
+    /**
+     * This method can save the last
+     * saved data in the system to
+     * Inventory and OrderStorage
+     * method
+     * @Post the data will be saved
+     *             out of the program
+     * */
+    public void save () throws IOException {
+        inventory.save();
+        //left the OrderStorage save method
+    }
+
+    /**
+     * This method loads the registered
+     * data to the program to keep
+     * the changes made in the last
+     * execution.
+     * @Post the last saved data will
+     *             be load
+     * */
+    public void loadData () throws IOException {
+        inventory.loadData();
+        //left the OrderStorage load method
+    }
 
 }
