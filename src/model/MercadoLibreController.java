@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.NonNaturalNumberException;
+import exceptions.OutOfStockException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,10 +11,14 @@ public class MercadoLibreController {
     private OrderStorage orderStorage;
 
     private static ArrayList<Product> productsToOrder;
+    private static ArrayList<Integer> productsAmount;
 
     public MercadoLibreController(){
         inventory = new Inventory();
         orderStorage = new OrderStorage();
+
+        productsToOrder = new ArrayList<>();
+        productsAmount = new ArrayList<>();
     }
 
     public Product createProduct(String name, String description, double price, int amount, int category)
@@ -61,8 +66,27 @@ public class MercadoLibreController {
         return inventoryToString;
     }
 
-    public void addOrder(Order newOrder, ArrayList<Product> orderProducts, ArrayList<Integer> amount){
-        orderStorage.makeOrder(newOrder, orderProducts, amount);
+    public void selectProductInInventory(int choice, int amount)
+            throws IllegalArgumentException, OutOfStockException {
+
+        if (choice >= inventory.getLastSearch().size()){
+            throw new IllegalArgumentException("Index out of range.");
+        }
+
+        Product tempProduct = inventory.getLastSearch().get(choice);
+
+        if (tempProduct.getAmount() == 0 || amount > tempProduct.getAmount()){
+            throw new OutOfStockException();
+        }
+
+        productsToOrder.add(tempProduct);
+        productsAmount.add(amount);
+    }
+
+    public void addOrder(Order newOrder){
+        orderStorage.makeOrder(newOrder, productsToOrder, productsAmount);
+        productsToOrder = new ArrayList<>();
+        productsAmount = new ArrayList<>();
     }
 
 
