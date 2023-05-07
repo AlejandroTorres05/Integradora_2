@@ -1,10 +1,13 @@
 package model;
 
+import com.google.gson.Gson;
 import exceptions.NonNaturalNumberException;
 import exceptions.ProductIsNotRegisteredException;
 import exceptions.ThereIsNotProductsByTheFilterException;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -13,7 +16,7 @@ import java.util.Collections;
   * */
 public class Inventory{
 
-
+    static String path = "inventoryData/data.txt";
     private static ArrayList<Product> lastSearch = new ArrayList<>();
     private ArrayList<Product> products;
 
@@ -188,18 +191,65 @@ public class Inventory{
         return -1;
     }
 
+    /**
+     * This method must find the position
+     * of the object that contains the entered
+     * characteristics. If the product isn't
+     * registered yet, this method will throw
+     * the ProductIsNotRegisteredException
+     * exception.
+     * @param name a String is the name of the product
+     *             that the user is searching for
+     *             his index
+     * @param price a double, is the name of the product
+     *             that the user is searching for
+     *             his index
+     * @param category an int is the reference of the
+     *                 category of the product that
+     *                 the user is searching for
+     * @param sales an int that represents the sales
+     *              of the product that the user is
+     *              searching for
+     * @Post: this method will return the required index
+     *              or will throw an exception
+     * */
     public int searchAnElement (String name, double price, int category, int sales)
             throws ProductIsNotRegisteredException, NonNaturalNumberException {
 
         Product temporal = new Product(name, "", price, 0, category);
+        temporal.setSales(sales);
         int index = indexOf(temporal);
 
         if(index == -1)
             throw new ProductIsNotRegisteredException();
+        lastSearch = new ArrayList<>();
+        lastSearch.add(this.products.get(index));
 
         return this.products.get(index).getAmount();
     }
 
+    /**
+     * This method is the main filter method
+     * when the user is searching products
+     * using a numeric range. If there aren't
+     * products according to the filter, this
+     * method throws ThereIsNotProductsByTheFilterException
+     * exception
+     * @param option an int that represents
+     *               the selected option
+     *               to make the filter
+     * @param beginning a double is the start
+     *                  or minor value of the
+     *                  products that the user is
+     *                  searching for
+     * @param end a double is the end or mayor value
+     *            of the products that the user
+     *            is searching for
+     * @return an ArrayList with the founded products
+     * @Post this method must return an arraylist or
+     *              throw ThereIsNotProductsByTheFilterException
+     *              exception
+     * */
     public ArrayList<Product> filterByRange (int option, double beginning, double end)
             throws ThereIsNotProductsByTheFilterException {
 
@@ -223,6 +273,20 @@ public class Inventory{
         return filtered;
     }
 
+    /**
+     * This method filter products by
+     * their prices using a numeric range
+     * @param beginning a double is the start
+     *                  or minor value of the
+     *                  products that the user is
+     *                  searching for
+     * @param end a double is the end or mayor value
+     *            of the products that the user
+     *            is searching for
+     * @return an ArrayList with the founded products
+     * @Post this method must return an arraylist
+     *              with the founded products
+     * */
     private ArrayList<Product> filterByPrice (double beginning, double end){
 
         ArrayList<Product> filtered = new ArrayList<>();
@@ -237,6 +301,20 @@ public class Inventory{
         return filtered;
     }
 
+    /**
+     * This method filter products by
+     * their sales number using a numeric range
+     * @param beginning an int is the start
+     *                  or minor value of the
+     *                  products that the user is
+     *                  searching for
+     * @param end an int is the end or mayor value
+     *            of the products that the user
+     *            is searching for
+     * @return an ArrayList with the founded products
+     * @Post this method must return an arraylist
+     *              with the founded products
+     * */
     private ArrayList<Product> filterBySales (int beginning, int end){
 
         ArrayList<Product> filtered = new ArrayList<>();
@@ -251,6 +329,20 @@ public class Inventory{
         return filtered;
     }
 
+    /**
+     * This method filter products by
+     * their amount quantity using a numeric range
+     * @param beginning an int is the start
+     *                  or minor value of the
+     *                  products that the user is
+     *                  searching for
+     * @param end an int is the end or mayor value
+     *            of the products that the user
+     *            is searching for
+     * @return an ArrayList with the founded products
+     * @Post this method must return an arraylist
+     *              with the founded products
+     * */
      private ArrayList<Product> filterByAmount (int beginning, int end){
 
          ArrayList<Product> filtered = new ArrayList<>();
@@ -265,6 +357,25 @@ public class Inventory{
          return filtered;
      }
 
+     /**
+      * This method can filter the products
+      * that contains the entered Strings. If
+      * there aren't products according to
+      * the filter, this method will throw
+      * ThereIsNotProductsByTheFilterException
+      * exception
+      * @param beginning a String, is the
+      *                  start that a product
+      *                  must have in his name
+      * @param end a String, is the end that
+      *            a product must have in his
+      *            name
+      * @return an ArrayList with the founded
+      *             products
+      * @Post this method must return an arraylist
+      *              with the founded products  or
+      *              throw the exception
+      * */
      public ArrayList<Product> filterByInterval (String beginning, String end)
              throws ThereIsNotProductsByTheFilterException{
 
@@ -279,5 +390,57 @@ public class Inventory{
          if (filtered.isEmpty())
              throw new ThereIsNotProductsByTheFilterException();
          return filtered;
+     }
+
+     /**
+      * This method can save the last
+      * saved data in the system
+      * @Post the data will be saved
+      *             out of the program
+      * */
+     public void save () throws IOException{
+         File file = new File(path);
+         FileOutputStream fos = new FileOutputStream(file);
+         Gson gson = new Gson();
+         String data = gson.toJson(this.products);
+         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
+         writer.write(data);
+         writer.flush();
+         fos.close();
+     }
+
+     /**
+      * This method loads the registered
+      * data to the program to keep
+      * the changes made in the last
+      * execution.
+      * @Post the last saved data will
+      *             be load
+      * */
+     public void loadData () throws IOException {
+         File file = new File(path);
+
+         if (file.exists()){
+             FileInputStream fis = new FileInputStream(file);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+
+             String content = "";
+             String line;
+
+             while ((line = reader.readLine()) != null){
+                 content += line + "\n";
+             }
+             Gson gson = new Gson();
+             Product[] array = gson.fromJson(content, Product[].class);
+             this.products.addAll(Arrays.asList(array));
+             fis.close();
+
+         }else {
+             File f = new File("inventoryData");
+             if (!f.exists()){
+                 f.mkdirs();
+             }
+             file.createNewFile();
+         }
      }
  }

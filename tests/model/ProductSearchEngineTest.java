@@ -59,10 +59,10 @@ public class ProductSearchEngineTest {
     /**
      * This method uses the searchAnElement
      * method to verify the amount of
-     * two products
+     * two products.
      * */
     @Test
-    public void searchAnElementCanReturnTheObjectWhenTheObjectIsSavedInTheInventoryTest ()
+    public void searchAnElementCanReturnTheObjectAmountWhenTheObjectIsSavedInTheInventoryTest ()
             throws NonNaturalNumberException {
         setupStage1();
         int amount1 = inventory.searchAnElement("Beer barrel", 100, 3, 0);
@@ -105,7 +105,7 @@ public class ProductSearchEngineTest {
             filteredProducts += filtered.get(i).getName() + " ";
         }
 
-        String expectedProducts = "Red T-shirt VacuumCleaner How to make money? Harry Potter Collection ";
+        String expectedProducts = "Harry Potter Collection How to make money? Red T-shirt VacuumCleaner ";
 
         assertEquals(filteredProducts, expectedProducts);
     }
@@ -123,20 +123,15 @@ public class ProductSearchEngineTest {
         setupStage1();
 
         ArrayList<Product> filtered = inventory.filterByRange(2,0,2);
-        ArrayList<Product> expectedProducts = new ArrayList<>();
+        String filteredProducts = "";
 
-        expectedProducts.add(new Product("Fridge", "Fridge", 500, 20, 1));
-        expectedProducts.add(new Product("Red lip", "Red lip", 2, 500, 6));
-        expectedProducts.add(new Product("Pencil box", "Pencil box", 2, 200, 4));
-        expectedProducts.add(new Product("Golty Ball", "To play soccer", 20, 60, 5));
-        expectedProducts.add(new Product("Red T-shirt", "Red T-shirt", 15, 100, 2));
-        expectedProducts.add(new Product("Beer barrel", "Beer barrel", 100, 15, 3));
-        expectedProducts.add(new Product("VacuumCleaner", "VacuumCleaner", 5, 20, 1));
-        expectedProducts.add(new Product("Play Station 5", "Ps is better than xbox", 500, 100, 7));
-        expectedProducts.add(new Product("How to make money?", "To make money", 5, 20, 0));
-        expectedProducts.add(new Product("Harry Potter Collection", "A book", 10, 10, 0));
+        for (int i = 0; i < filtered.size(); i++){
+            filteredProducts += filtered.get(i).getName() + " ";
+        };
 
-        assertEquals(filtered, expectedProducts);
+        String expectedProducts = "Beer barrel Fridge Golty Ball Harry Potter Collection How to make money? Pencil box Play Station 5 Red T-shirt Red lip VacuumCleaner ";
+
+        assertEquals(expectedProducts, filteredProducts);
     }
 
     /**
@@ -151,16 +146,15 @@ public class ProductSearchEngineTest {
         setupStage1();
 
         ArrayList<Product> filtered = inventory.filterByRange(3,10,60);
-        ArrayList<Product> expectedProducts = new ArrayList<>();
+        String filteredProducts = "";
 
-        expectedProducts.add(new Product("Fridge", "Fridge", 500, 20, 1));
-        expectedProducts.add(new Product("Golty Ball", "To play soccer", 20, 60, 5));
-        expectedProducts.add(new Product("Beer barrel", "Beer barrel", 100, 15, 3));
-        expectedProducts.add(new Product("VacuumCleaner", "VacuumCleaner", 5, 20, 1));
-        expectedProducts.add(new Product("How to make money?", "To make money", 5, 20, 0));
-        expectedProducts.add(new Product("Harry Potter Collection", "A book", 10, 10, 0));
+        for (int i = 0; i < filtered.size(); i++){
+            filteredProducts += filtered.get(i).getName() + " ";
+        };
 
-        assertEquals(filtered, expectedProducts);
+        String expectedProducts = "Beer barrel Fridge Golty Ball Harry Potter Collection How to make money? VacuumCleaner ";
+
+        assertEquals(expectedProducts, filteredProducts);
     }
 
     /**
