@@ -6,30 +6,36 @@ import java.util.ArrayList;
  * @author Alejandro Torres Soto
  * */
 public class OrderStorage {
-    ArrayList<Order> orders;
+    ArrayList<Order> orderStorage;
 
     /**
      * Creates a ordersDataBase.
      */
     public OrderStorage(){
-        orders = new ArrayList<>();
+        orderStorage = new ArrayList<>();
     }
 
-    /**
-     * adds a new order to orders.
-     * @param newOrder The order to be added.
-     */
-    public void addOrder(Order newOrder){
-        orders.add(newOrder);
+    public void makeOrder(Order newOrder, ArrayList<Product> orderProducts, ArrayList<Integer> amount){
+        newOrder.setOrderProducts(addProductsToOrder(newOrder, orderProducts, amount));
+        orderStorage.add(newOrder);
     }
 
-    /**
-     * add a product to the last order in orders.
-     * @param product the product to be added.
-     * @param amount the amount of the product to be added.
-     */
-    public void addProductToOrder(Product product, int amount){
-        int index = orders.size()-1;
-        orders.get(index).addProduct(product, amount);
+    private ArrayList<ProductOrder> addProductsToOrder(Order order, ArrayList<Product> orderProducts, ArrayList<Integer> amount){
+        ArrayList<ProductOrder> productOrders = new ArrayList<>();
+
+        for (int i = 0; i < orderProducts.size(); i++){
+            Product tempProduct = orderProducts.get(i);
+            int tempAmount = amount.get(i);
+
+            orderProducts.get(i).decreaseAmount(tempAmount);
+
+            productOrders.add(new ProductOrder(tempProduct, tempAmount));
+        }
+
+        return productOrders;
+    }
+
+    public ArrayList<Order> getOrderStorage() {
+        return orderStorage;
     }
 }

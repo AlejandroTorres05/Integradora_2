@@ -45,6 +45,14 @@ public class Inventory{
     }
 
     /**
+     * Returns the last search performed.
+     * @return The last search performed.
+     */
+    public ArrayList<Product> getLastSearch() {
+        return lastSearch;
+    }
+
+    /**
      * This method is called when the method
      * saveProduct gets a product that isn't
      * registered in the system, and it's necessary
@@ -82,7 +90,7 @@ public class Inventory{
             throw new NonNaturalNumberException("Cannot add negative or null amount to a product");
         }
         int index = indexOf(goal);
-        this.products.get(index).editAmount(amount);
+        this.products.get(index).addAmount(amount);
     }
 
 

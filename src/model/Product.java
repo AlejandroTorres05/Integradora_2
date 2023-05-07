@@ -90,17 +90,17 @@ public class Product implements Comparable<Product>{
         return amount;
     }
     /**
-     * Sets the amount of the product.
-     * @param amount The new amount of the product.
+     * Decreases to the product the specified amount to the current amount.
+     * @param amount the amount to decrease to the current amount of the product.
      */
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void decreaseAmount(int amount) {
+        this.amount -= amount;
     }
     /**
      * Adds to the product the specified amount to the current amount.
      * @param amount the amount to add to the current amount of the product.
      */
-    public void editAmount (int amount) {
+    public void addAmount(int amount) {
         this.amount += amount;
     }
 

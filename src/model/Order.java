@@ -12,7 +12,7 @@ public class Order {
     private double totalPrice;
     private LocalDate orderDate;
 
-    private ArrayList<Product> order;
+    private ArrayList<ProductOrder> orderProducts;
 
     /**
      Creates an order with the specified customer name and current date.
@@ -32,7 +32,7 @@ public class Order {
         this.orderDate = orderDate;
         totalPrice = 0;
 
-        order = new ArrayList<>();
+        orderProducts = new ArrayList<>();
     }
 
     /**
@@ -66,8 +66,8 @@ public class Order {
     }
 
     /**
-     * Returns the date on which the order was placed
-     * @return the date on which the order was placed
+     * Returns the date on which the order was placed.
+     * @return the date on which the order was placed.
      */
     public LocalDate getOrderDate() {
         return orderDate;
@@ -81,35 +81,28 @@ public class Order {
     }
 
     /**
-     * Adds the product to the order. If the product already exists,
-     * it edits the existing quantity in the inventory.
-     * @param product The product to be added.
-     * @param amount The amount of the product to be added.
+     * Returns the list of products in the order.
+     * @return the list of products in the order.
      */
-    public void addProduct(Product product, int amount){
-        int index = searchProductInOrder(product);
-
-        if (index != -1){
-            order.get(index).editAmount(amount);
-        } else{
-            product.setSales(0);
-            product.setAmount(amount);
-            order.add(product);
-        }
+    public ArrayList<ProductOrder> getOrderProducts() {
+        return orderProducts;
+    }
+    /**
+     * Sets the order products of the order.
+     * @param orderProducts The new order products of the order.
+     */
+    public void setOrderProducts(ArrayList<ProductOrder> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
     /**
-     * Searches for the index of the product in the Order. If it is not found, it returns -1.
-     * @param product the product to be searched.
-     * @return The index of the product, or -1 if it's not found.
+     * Adds the product order to the order
+     * @param product The product order to be added.
      */
-    private int searchProductInOrder(Product product){
-        for (int i = 0; i<order.size(); i++){
-            String productToCompare = order.get(i).getName();
-            if (product.getName().equalsIgnoreCase(productToCompare)) return i;
-        }
-
-        return -1;
+    public void addProduct(ProductOrder product){
+        totalPrice += product.getTotalPrice();
+        orderProducts.add(product);
     }
+
 
 }
