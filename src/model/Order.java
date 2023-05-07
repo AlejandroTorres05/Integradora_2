@@ -84,8 +84,8 @@ public class Order {
      * Returns the list of products in the order.
      * @return the list of products in the order.
      */
-    public ArrayList<ProductOrder> getOrderProducts() {
-        return orderProducts;
+    public ProductOrder getOrderProducts(int index) {
+        return orderProducts.get(index);
     }
     /**
      * Sets the order products of the order.

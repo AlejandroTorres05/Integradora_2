@@ -35,7 +35,7 @@ public class OrderStorage {
         return productOrders;
     }
 
-    public ArrayList<Order> getOrderStorage() {
-        return orderStorage;
+    public Order getOrderStorage(int index) {
+        return orderStorage.get(index);
     }
 }

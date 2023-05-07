@@ -136,7 +136,7 @@ public class MercadoLibreManager {
         System.out.println("Please type the sales of the product");
         int sales = sc.nextInt();
 
-        int amount = controller.searchAProduct(name, price, category-1, sales)
+        int amount = controller.searchAProduct(name, price, category-1, sales);
 
         System.out.println("There are " + amount + " units of " + name);
 
