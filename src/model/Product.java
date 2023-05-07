@@ -120,6 +120,14 @@ public class Product implements Comparable<Product>{
     }
 
     /**
+     * Adds to the product the specified sales to the current sales.
+     * @param sales the sales to add to the current sales of the product.
+     */
+    public void addSales(int sales) {
+        this.sales += sales;
+    }
+
+    /**
      Returns the index of the Category enum based on the category of the product.
      @return the index of the Category.
      */

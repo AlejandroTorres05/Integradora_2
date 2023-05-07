@@ -180,7 +180,7 @@ public class MercadoLibreController {
      * */
     public void save () throws IOException {
         inventory.save();
-        //left the OrderStorage save method
+        orderStorage.save();
     }
 
     /**
@@ -193,7 +193,7 @@ public class MercadoLibreController {
      * */
     public void loadData () throws IOException {
         inventory.loadData();
-        //left the OrderStorage load method
+        orderStorage.loadData();
     }
 
 }

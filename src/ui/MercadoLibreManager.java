@@ -1,10 +1,12 @@
 package ui;
 
 import exceptions.NonNaturalNumberException;
+import exceptions.OutOfStockException;
 import exceptions.ProductIsNotRegisteredException;
 import exceptions.ThereIsNotProductsByTheFilterException;
 import model.MercadoLibreController;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MercadoLibreManager {
@@ -28,12 +30,15 @@ public class MercadoLibreManager {
                     ¬ | Menu
                      1. Register New Product
                      2. View amount of an specific product
-                     3. View products by range 
-                     4. Option
-                     5. Option
+                     3. View products by range
+                     4. Make a Order.
+                     5. option
+                     6. Save Data.
+                     7. Load Data.
                     """);
 
             option = sc.nextInt();
+            sc.nextLine();
 
         try {
             executeMenu(option);
@@ -44,12 +49,14 @@ public class MercadoLibreManager {
             //Esta no se como manejarla
         } catch (ThereIsNotProductsByTheFilterException ex){
             System.out.println("There was an error. There aren't products according to the last range");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         } while (option != 0);
     }
 
-    public void executeMenu(int option) throws
-            NonNaturalNumberException, ProductIsNotRegisteredException{
+    public void executeMenu(int option)
+            throws NonNaturalNumberException, ProductIsNotRegisteredException, IOException {
         switch (option){
             case 0:
                 System.out.println("Closing menu, Goodbye...");
@@ -68,6 +75,17 @@ public class MercadoLibreManager {
                 filterByRange();
                 break;
 
+            case 4:
+
+
+
+            case 6:
+                controller.save();
+                break;
+
+            case 7:
+                controller.loadData();
+                break;
             default:
                 System.out.println("Error, Option out of range.");
                 break;

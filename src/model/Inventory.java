@@ -16,7 +16,7 @@ import java.util.Collections;
   * */
 public class Inventory{
 
-    static String path = "inventoryData/data.txt";
+    static String path = "resources/inventoryData.json";
     private static ArrayList<Product> lastSearch = new ArrayList<>();
     private ArrayList<Product> products;
 
@@ -450,6 +450,8 @@ public class Inventory{
              }
              file.createNewFile();
          }
+
+         lastSearch = products;
      }
 
  }
