@@ -16,7 +16,12 @@ public class OrderStorage {
     }
 
     public void makeOrder(Order newOrder, ArrayList<Product> orderProducts, ArrayList<Integer> amount){
-        newOrder.setOrderProducts(addProductsToOrder(newOrder, orderProducts, amount));
+        ArrayList<ProductOrder> productOrders = addProductsToOrder(newOrder, orderProducts, amount);
+
+        for (ProductOrder x: productOrders){
+            newOrder.addProduct(x);
+        }
+
         orderStorage.add(newOrder);
     }
 
@@ -37,5 +42,18 @@ public class OrderStorage {
 
     public Order getOrderStorage(int index) {
         return orderStorage.get(index);
+    }
+
+    private ArrayList<Order> filterByTotalPrice (double beginning, double end){
+
+        ArrayList<Order> filtered = new ArrayList<>();
+
+        for (int i = 0; i< orderStorage.size(); i++){
+            if (orderStorage.get(i).getTotalPrice() >= beginning && orderStorage.get(i).getTotalPrice() <= end){
+                filtered.add(orderStorage.get(i));
+            }
+        }
+
+        return filtered;
     }
 }

@@ -1,7 +1,8 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * @author Silem Nabib Villa Contreras
  * @author Alejandro Torres Soto
@@ -10,7 +11,7 @@ public class Order {
 
     private String customerName;
     private double totalPrice;
-    private LocalDate orderDate;
+    private Date orderDate;
 
     private ArrayList<ProductOrder> orderProducts;
 
@@ -19,7 +20,7 @@ public class Order {
      @param customerName the name of the customer who placed the order
      */
     public Order(String customerName){
-        this(customerName, LocalDate.now());
+        this(customerName, new Date());
     }
 
     /**
@@ -27,7 +28,7 @@ public class Order {
      @param customerName the name of the customer who placed the order
      @param orderDate the date on which the order was placed
      */
-    public Order(String customerName, LocalDate orderDate){
+    public Order(String customerName, Date orderDate){
         this.customerName = customerName;
         this.orderDate = orderDate;
         totalPrice = 0;
@@ -69,14 +70,14 @@ public class Order {
      * Returns the date on which the order was placed.
      * @return the date on which the order was placed.
      */
-    public LocalDate getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
     /**
      * Sets the order date of the order.
      * @param orderDate The new order date of the order.
      */
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -86,13 +87,6 @@ public class Order {
      */
     public ProductOrder getOrderProducts(int index) {
         return orderProducts.get(index);
-    }
-    /**
-     * Sets the order products of the order.
-     * @param orderProducts The new order products of the order.
-     */
-    public void setOrderProducts(ArrayList<ProductOrder> orderProducts) {
-        this.orderProducts = orderProducts;
     }
 
     /**

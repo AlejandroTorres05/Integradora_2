@@ -141,4 +141,20 @@ public class OrderStorageTest {
         assertEquals(productAmountExpected, productAmount);
     }
 
+    @Test
+    public void orderTotalPriceTest(){
+        setupStage1();
+
+        double totalPriceExpected = 0;
+        totalPriceExpected += orderStorage.getOrderStorage(0).getOrderProducts(0).getTotalPrice();
+        totalPriceExpected += orderStorage.getOrderStorage(0).getOrderProducts(1).getTotalPrice();
+        totalPriceExpected += orderStorage.getOrderStorage(0).getOrderProducts(2).getTotalPrice();
+        totalPriceExpected += orderStorage.getOrderStorage(0).getOrderProducts(3).getTotalPrice();
+        totalPriceExpected += orderStorage.getOrderStorage(0).getOrderProducts(4).getTotalPrice();
+
+        double totalPrice = orderStorage.getOrderStorage(0).getTotalPrice();
+
+        assertEquals(totalPriceExpected, totalPrice);
+    }
+
 }
