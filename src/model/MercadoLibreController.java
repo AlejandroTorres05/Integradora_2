@@ -183,7 +183,35 @@ public class MercadoLibreController {
 
         for (int i = 0; i<lasSearch.size(); i++){
             Product temporal = lasSearch.get(i);
-            message += (i+1) + ". " + temporal.getName() + " ,price " + temporal.getPrice() + " ,amount " + temporal.getAmount();
+            message += (i+1) + ". " + temporal.getName() + " ,price " + temporal.getPrice() + " ,amount " + temporal.getAmount() + "\n";
+        }
+
+        return message;
+    }
+
+    public void filterByInterval (String beginning, String end)
+            throws ThereIsNotProductsByTheFilterException{
+        inventory.filterByInterval(beginning, end);
+    }
+
+    public String showByIntervalSearch(int order){
+        String message = "";
+        ArrayList<Product> lastSearch = inventory.getLastSearch();
+
+        switch (order){
+            case 1:
+                Collections.sort(lastSearch);
+                break;
+            case 2:
+                Collections.sort(lastSearch, (a,b)->{
+                    return b.getName().compareTo(a.getName());
+                });
+                break;
+        }
+
+        for (int i = 0; i<lastSearch.size(); i++){
+            Product temporal = lastSearch.get(i);
+            message += (i+1) + ". " + temporal.getName() + " ,price " + temporal.getPrice() + " ,amount " + temporal.getAmount() + "\n";
         }
 
         return message;

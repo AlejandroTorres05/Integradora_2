@@ -35,6 +35,7 @@ public class MercadoLibreManager {
                      5. option
                      6. Save Data.
                      7. Load Data.
+                     8. View products by interval 
                     """);
 
             System.out.print("Select an option: ");
@@ -87,6 +88,11 @@ public class MercadoLibreManager {
             case 7:
                 controller.loadData();
                 break;
+
+            case 8:
+
+                break;
+
             default:
                 System.out.println("Error, Option out of range.");
                 break;
@@ -229,5 +235,21 @@ public class MercadoLibreManager {
         /*
         * Aqui podes meter la opcion de comprar de una
         * */
+    }
+
+    public void filterByInterval (){
+        System.out.println("Please type the first letter or prefix");
+        sc.nextLine();
+        String beginning = sc.nextLine();
+        System.out.println("Please type the last letter suffix");
+        String end = sc.nextLine();
+
+        controller.filterByInterval(beginning, end);
+
+        System.out.println("Do yo want to see the products ordered in:"
+                + "\n1. Upward order"
+                + "\n2. Falling order");
+        int order = sc.nextInt();
+        System.out.println(controller.showByIntervalSearch(order));
     }
 }
