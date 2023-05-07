@@ -1,17 +1,17 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * @author Silem Nabib Villa Contreras
  * @author Alejandro Torres Soto
  * */
-public class Order {
+public class Order implements Comparable<Order> {
 
     private String customerName;
     private double totalPrice;
-    private Date orderDate;
+    private LocalDate orderDate;
 
     private ArrayList<ProductOrder> orderProducts;
 
@@ -20,7 +20,7 @@ public class Order {
      @param customerName the name of the customer who placed the order
      */
     public Order(String customerName){
-        this(customerName, new Date());
+        this(customerName, LocalDate.now());
     }
 
     /**
@@ -28,7 +28,7 @@ public class Order {
      @param customerName the name of the customer who placed the order
      @param orderDate the date on which the order was placed
      */
-    public Order(String customerName, Date orderDate){
+    public Order(String customerName, LocalDate orderDate){
         this.customerName = customerName;
         this.orderDate = orderDate;
         totalPrice = 0;
@@ -70,14 +70,14 @@ public class Order {
      * Returns the date on which the order was placed.
      * @return the date on which the order was placed.
      */
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
     /**
      * Sets the order date of the order.
      * @param orderDate The new order date of the order.
      */
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -98,5 +98,9 @@ public class Order {
         orderProducts.add(product);
     }
 
+    @Override
+    public int compareTo(Order o1) {
+        return o1.getOrderDate().compareTo(this.orderDate);
+    }
 
 }

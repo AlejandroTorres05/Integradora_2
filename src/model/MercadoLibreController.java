@@ -6,11 +6,10 @@ import exceptions.ProductIsNotRegisteredException;
 import exceptions.ThereIsNotProductsByTheFilterException;
 
 import java.io.IOException;
-import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.text.SimpleDateFormat;
 
 public class MercadoLibreController {
     private Inventory inventory;
@@ -48,16 +47,15 @@ public class MercadoLibreController {
         inventory.saveProduct(newProduct);
     }
 
-    public Date createLocalDate(int year, int month, int day) throws ParseException {
-        String date = day + "/" + month + "/" + year;
-        return new SimpleDateFormat("dd/MM/yyyy").parse(date);
+    public LocalDate createLocalDate(int year, int month, int day) {
+        return LocalDate.of(year, month, day);
     }
 
     public Order createOrder(String purchaserName){
         return new Order(purchaserName);
     }
 
-    public Order createOrder(String purchaserName, Date purchaseDate){
+    public Order createOrder(String purchaserName, LocalDate purchaseDate){
         return new Order(purchaserName, purchaseDate);
     }
 
