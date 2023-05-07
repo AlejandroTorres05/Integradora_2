@@ -37,6 +37,7 @@ public class MercadoLibreManager {
                      7. Load Data.
                     """);
 
+            System.out.print("Select an option: ");
             option = sc.nextInt();
             sc.nextLine();
 
@@ -76,8 +77,8 @@ public class MercadoLibreManager {
                 break;
 
             case 4:
-
-
+                registerOrder();
+                break;
 
             case 6:
                 controller.save();
@@ -130,7 +131,46 @@ public class MercadoLibreManager {
     }
 
     public void registerOrder(){
+        System.out.print("Enter Customer Name: ");
+        String customerName = sc.nextLine();
 
+        System.out.println("Please enter the date in the following format yy mm dd. If the date is today, enter 0 0 0.");
+        int yy = sc.nextInt();
+        int mm = sc.nextInt();
+        int dd = sc.nextInt();
+        sc.nextLine();
+
+        int productSelection = 0;
+        int amountSelection = 0;
+        do{
+           // ! Aqui ira el metodo apra acceder a la busqueda por el inventario
+
+            System.out.print("Select a product: ");
+            productSelection = sc.nextInt();
+            sc.nextLine();
+
+            if (productSelection != 0){
+                System.out.print("Enter the required quantity: ");
+                amountSelection = sc.nextInt();
+                sc.nextLine();
+
+                if (amountSelection != 0){
+                    try {
+                        controller.selectProductInInventory(productSelection-1, amountSelection);
+                    } catch (OutOfStockException | IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+
+        } while(productSelection != 0 && amountSelection != 0);
+
+        if (yy == 0 || mm == 0 || dd == 0){
+            controller.addOrder(controller.createOrder(customerName));
+        } else {
+            controller.addOrder(controller.createOrder(customerName, controller.createLocalDate(yy,mm,dd)));
+
+        }
     }
 
     public void searchAProduct ()

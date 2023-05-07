@@ -79,19 +79,38 @@ public class MercadoLibreController {
         }
 
         Product tempProduct = inventory.getLastSearch().get(choice);
+        int extraAmount = searchProductAmountInProductsToOrder(choice);
 
-        if (tempProduct.getAmount() == 0 || amount > tempProduct.getAmount()){
+        if (tempProduct.getAmount() == 0 || (amount + extraAmount) > tempProduct.getAmount()){
             throw new OutOfStockException();
         }
 
-        productsToOrder.add(tempProduct);
-        productsAmount.add(amount);
+        if (extraAmount != 0){
+            Product productPointer = inventory.getLastSearch().get(choice);
+            int index = productsToOrder.indexOf(productPointer);
+            productsAmount.add(index, productsAmount.get(index) + amount);
+        } else {
+            productsToOrder.add(tempProduct);
+            productsAmount.add(amount);
+        }
+    }
+
+    private int searchProductAmountInProductsToOrder(int choice){
+        Product productPointer = inventory.getLastSearch().get(choice);
+
+        if (productsToOrder.contains(productPointer)){
+            return productsAmount.get(productsToOrder.indexOf(productPointer));
+        }
+
+        return 0;
     }
 
     public void addOrder(Order newOrder){
-        orderStorage.makeOrder(newOrder, productsToOrder, productsAmount);
-        productsToOrder = new ArrayList<>();
-        productsAmount = new ArrayList<>();
+        if (!productsToOrder.isEmpty()){
+            orderStorage.makeOrder(newOrder, productsToOrder, productsAmount);
+            productsToOrder = new ArrayList<>();
+            productsAmount = new ArrayList<>();
+        }
     }
 
     /**
