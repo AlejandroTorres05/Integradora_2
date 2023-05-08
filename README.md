@@ -65,26 +65,26 @@ ___
 <br> **Completitud** = 0.45
 <br> **Descripción**: Para este commit el buscador de productos estaba completo y pasaba todos los tests
 
-### Iteración N
-<br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
-<br> **Densidad de errores-fallos** = N
-<br> **Confiabilidad** = N
-<br> **Completitud** = N
-<br> **Descripción**: N
-
-### Iteración 9
+### Iteración 8
 <br> Para esta iteración se tendrá en cuenta el commit: **5d6619f6dd95bbdb2bfaf50b172e608fb186e891**
 <br> **Densidad de errores-fallos** = 0
 <br> **Confiabilidad** = 1
-<br> **Completitud** = 60
-<br> **Descripción**: En este commit estaban completamente implementadas las funcionalidades de guardar un producto, buscador de productos, guardar un pedido y la mmitad de la persistencia con sus respectivos tests aprobados  
+<br> **Completitud** = 0.6
+<br> **Descripción**: En este commit estaban completamente implementadas las funcionalidades de guardar un producto, buscador de productos, guardar un pedido y la mmitad de la persistencia con sus respectivos tests aprobados 
 
-### Iteración N
-<br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
-<br> **Densidad de errores-fallos** = N
-<br> **Confiabilidad** = N
-<br> **Completitud** = N
-<br> **Descripción**: N
+### Iteración 9
+<br> Para esta iteración se tendrá en cuenta el commit: ** 700a8894f9599c8ee282839eda3e38f5cf6f9a41 **
+<br> **Densidad de errores-fallos** = 0
+<br> **Confiabilidad** = 1
+<br> **Completitud** = 0.8
+<br> **Descripción**: En este commit se implemento por completo la persistencia, ademas de agregar algunas implementaciones para la clase pedidos
+
+### Iteración 10
+<br> Para esta iteración se tendrá en cuenta el commit: ** c65cb279053b19b7686dc692929f0673a0c949c1 **
+<br> **Densidad de errores-fallos** = 0
+<br> **Confiabilidad** = 1
+<br> **Completitud** = 1
+<br> **Descripción**: En este commit se implementaron todas la funcionalidad de hacer un pedido, ademas de que se termino la clae manager para permitir el ingreso por consola.
 ___
 ## Notas importantes
 
