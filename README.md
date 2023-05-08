@@ -44,6 +44,41 @@ ___
 <br> **Completitud** = 10
 <br> **Descripción**: Para este momento del desarrollo, podeos establecer una densidad de errores de 2 uy una confiabilidad de 15, El indicador de completitud avanza a 10 ya que se permite guardar un nuevo producto o aumentar su cantidad en caso de que ya exista.
 
+### Iteración 5
+<br> Para esta iteración se tendrá en cuenta el commit: **c15ede712d3cd1c3f0aa50d1def724b35b96fba4**
+<br> **Densidad de errores-fallos** = 0.33
+<br> **Confiabilidad** = 0.67
+<br> **Completitud** = 0.1
+<br> **Descripción**: En este commit se hizo la reconstruccion de la clase Inventory y no hubo alguna otra modificacion. Excepto, de la agregacíon de tres test del buscador de pedidos. Por esto, la confiabilidad y densidad de errores se vieron afectadas 
+
+### Iteración 6
+<br> Para esta iteración se tendrá en cuenta el commit: **be53612ffe3538e43e3c1a4fd17731df3c4f5071**
+<br> **Densidad de errores-fallos** = 0.2
+<br> **Confiabilidad** = 0.8
+<br> **Completitud** = 0.35
+<br> **Descripción**: Para este commit, se agregaron las funcionalidades del buscador de productos y el programa fallaba tres tests
+
+### Iteración 7
+<br> Para esta iteración se tendrá en cuenta el commit: **c3c8ee3365c9e462815cb862b53e37021f50a3bc**
+<br> **Densidad de errores-fallos** = 0
+<br> **Confiabilidad** = 1
+<br> **Completitud** = 0.45
+<br> **Descripción**: Para este commit el buscador de productos estaba completo y pasaba todos los tests
+
+### Iteración N
+<br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
+<br> **Densidad de errores-fallos** = N
+<br> **Confiabilidad** = N
+<br> **Completitud** = N
+<br> **Descripción**: N
+
+### Iteración 9
+<br> Para esta iteración se tendrá en cuenta el commit: **5d6619f6dd95bbdb2bfaf50b172e608fb186e891**
+<br> **Densidad de errores-fallos** = 0
+<br> **Confiabilidad** = 1
+<br> **Completitud** = 60
+<br> **Descripción**: En este commit estaban completamente implementadas las funcionalidades de guardar un producto, buscador de productos, guardar un pedido y la mmitad de la persistencia con sus respectivos tests aprobados  
+
 ### Iteración N
 <br> Para esta iteración se tendrá en cuenta el commit: ** CommitNumber **
 <br> **Densidad de errores-fallos** = N
