@@ -57,7 +57,7 @@ public class OrderStorage {
         return orderStorage.get(index);
     }
 
-    private ArrayList<Order> filterByTotalPrice(double beginning, double end) {
+    public ArrayList<Order> filterByTotalPrice(double beginning, double end) {
 
         ArrayList<Order> filtered = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class OrderStorage {
         return filtered;
     }
 
-    private ArrayList<Order> filterByOrderDate(LocalDate beginningYear, LocalDate endYear) {
+    public ArrayList<Order> filterByOrderDate(LocalDate beginningYear, LocalDate endYear) {
         ArrayList<Order> tempArr = orderStorage;
         Collections.sort(tempArr);
 
@@ -91,7 +91,7 @@ public class OrderStorage {
         Collections.sort(orderStorage, Comparator.comparingDouble(Order::getTotalPrice));
     }
 
-    public ArrayList<Order> filterOrderByInterval(String beginning, String end)
+    public ArrayList<Order> filterOrderByPrefixInterval(String beginning, String end)
             throws ThereIsNotProductsByTheFilterException {
 
         ArrayList<Order> filtered = new ArrayList<>();

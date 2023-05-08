@@ -1,13 +1,9 @@
 package model;
 
-import exceptions.NonNaturalNumberException;
-import exceptions.OutOfStockException;
-import exceptions.ProductIsNotRegisteredException;
-import exceptions.ThereIsNotProductsByTheFilterException;
+import exceptions.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -243,4 +239,58 @@ public class MercadoLibreController {
         orderStorage.loadData();
     }
 
+    public String showOrder(ArrayList<Order> arrayToShow){
+
+        String outPutMessage = "1. Customer Name: " + arrayToShow.get(0).getCustomerName() +
+                " Order Date: " + arrayToShow.get(0).getOrderDate() +
+                " Total Price: " + arrayToShow.get(0).getTotalPrice();
+        for (int i = 1; i < arrayToShow.size(); i++){
+            outPutMessage += "\n" + (i+1) + ". Customer Name: " + arrayToShow.get(i).getCustomerName() +
+                    " Order Date: " + arrayToShow.get(i).getOrderDate() +
+                    " Total Price: " + arrayToShow.get(i).getTotalPrice();
+        }
+
+        return outPutMessage;
+    }
+
+    public ArrayList<Order> orderByTotalPriceInterval(double beginning, double end)
+            throws EmptyOrderStorageException, NonNaturalNumberException, IllegalArgumentException {
+
+        if (beginning <= 0 || end <= 0) throw new NonNaturalNumberException("Negative numbers not valid.");
+        if (beginning > end) throw new IllegalArgumentException("Beginning range must be less than the final range");
+
+        ArrayList<Order> tempOrderArr = orderStorage.filterByTotalPrice(beginning, end);
+
+        if (tempOrderArr.isEmpty()) throw new EmptyOrderStorageException();
+
+        return tempOrderArr;
+    }
+
+    public ArrayList<Order> orderByPrefixInterval(String beginning, String end)
+            throws EmptyOrderStorageException, IllegalArgumentException {
+
+        if (beginning.compareTo(end) > 0){
+            throw new IllegalArgumentException("Beginning range must be less than the final range");
+        }
+
+        ArrayList<Order> tempOrderArr = orderStorage.filterOrderByPrefixInterval(beginning, end);
+
+        if (tempOrderArr.isEmpty()) throw new EmptyOrderStorageException();
+
+        return tempOrderArr;
+    }
+
+    public ArrayList<Order> orderByDateInterval(LocalDate beginning, LocalDate end)
+            throws EmptyOrderStorageException, IllegalArgumentException {
+
+        if (beginning.isAfter(end)) {
+            throw new IllegalArgumentException("Beginning range must be less than the final range");
+        }
+
+        ArrayList<Order> tempOrderArr = orderStorage.filterByOrderDate(beginning, end);
+
+        if (tempOrderArr.isEmpty()) throw new EmptyOrderStorageException();
+
+        return tempOrderArr;
+    }
 }
